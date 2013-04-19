@@ -1,0 +1,42 @@
+%fronteras dirichlet
+%recorre por y
+
+[phi] = ej3_profe(dx,dy)
+	lx = 3;
+	ly = 1;
+	Q = 0;
+	Nx = floor(lx/dx); %cantidad de intervalos en x
+	Ny = floor(ly/dy); %cantidad de itnervalos en y
+	tam = (Nx+1)*(Ny+1);
+	K = zeros(tam,tam); %matriz del mismo tamaño
+	b = zeros((Nx+1)*(Ny+1),1);
+	p = pos((Nx+1),(Ny+1),Ny); %posicion del punto (Nx+1,Ny+1)
+	for i=1:(Nx+1)
+		for j=1:(Ny+1)
+			p = pos(i,j,Ny);
+			if((i == 1) | (i == Nx+1) | (j == 1) | (j==Ny+1))
+				K(p,p) = 1;
+				b(p) = 0; %por cond Dirichlet
+			else
+				K(p,p) = -2/(dx^2) - 2/(dy^2); 
+				p2 = pos(i,j+1,Ny);
+				K(p,p2) = 1/(dy^2); %norte
+				p3 = pos(i,j-1,Ny);
+				K(p,p3) = 1/(dy^2); %sur
+				p4 = pos(i-1,j,Ny);
+				K(p,p4) = 1/(dx^2); %oeste
+				p5 = pos(i+1,j,Ny);
+				K(p,p5) = 1/(dx^2); %este
+				b(p) = -Q;
+			end
+		end
+	end
+
+	phi = K\b; %solucion
+	res = reshape(phi,Ny+1,Nx+1);
+	mesh(res);
+	return;
+
+function [p] = pos(i,j,Ny)
+	p = (i-1)*(Ny+1)+j;
+	return;

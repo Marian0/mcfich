@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Ejercicio 1 - Difusi\'on del Calor}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Parte A}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Parte B}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Parte C}{5}{subsection.1.3}
+\contentsline {section}{\numberline {2}Ejercicio 4 - Flujo Potencial}{6}{section.2}
